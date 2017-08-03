@@ -1,0 +1,13 @@
+// Reset
+* {
+    all: unset;
+}
+
+base, basefont, datalist, head, meta, script, style, title,
+noembed, param, template {
+    display: none;
+}
+
+// Variables & Mixins
+@import "_variables.scss";
+@import "_mixins.scss";

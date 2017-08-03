@@ -1,0 +1,17 @@
+@mixin clearfix {
+	zoom: 1;
+	&:before,
+	&:after {
+		content: " "; /* 1 */
+		display: table; /* 2 */
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin r($size) {
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
