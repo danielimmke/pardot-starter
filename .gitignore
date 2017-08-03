@@ -1,5 +1,6 @@
 /node_modules/
 scripts.js
+!src/js/scripts.js
 style.css
 index.html
 npm-debug.log
