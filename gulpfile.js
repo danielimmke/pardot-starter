@@ -6,15 +6,21 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var inline = require('gulp-inline');
 var rename = require('gulp-rename');
+var nunjucksRender = require('gulp-nunjucks-render');
 
 // Style Paths
 var scss = [
-	'src/scss/*'
+	'assets/scss/*'
 ]
 
 // JS Paths
 var js = [
-	'src/js/*'
+	'assets/js/*'
+];
+
+// Source Files
+var source = [
+	'source/**/*'
 ];
 
 /**
@@ -24,7 +30,7 @@ gulp.task('sass', function(){
 	return gulp.src(scss)
 		.pipe(sass({style: 'compact'}))
 		.pipe(minifycss({keepBreaks: false}))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('build/'))
 		.pipe(notify('SASS done.'));
 });
 
@@ -34,23 +40,33 @@ gulp.task('sass', function(){
 gulp.task('js', function(){
 	return gulp.src(js)
 		.pipe(concat('scripts.js'))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('build/'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('build/'))
 		.pipe(notify('JS done.'));
 });
 
 /**
-* Take linked files in index-source.html and inline them, printing everything to index.html.
+* Pull partials into templates and compile into /preview/ folder.
 */
-gulp.task('inline', function(){
-	return gulp.src('index-source.html')
-		.pipe(inline({
-			base: './',
-		}))
-		.pipe(rename('index.html'))
-		.pipe(gulp.dest('./'))
-		.pipe(notify('Inserted styles and scripts inline into index.html.'));
+gulp.task('nunjucks', function() {
+  return gulp.src('source/*.+(html|nunjucks)')
+  .pipe(nunjucksRender({
+      path: ['source/']
+    }))
+  .pipe(gulp.dest('preview/'))
+});
+
+/**
+* Take linked CSS/JS files in html files in /preview/ and inline them, printing everything to /build/ folder.
+*/
+gulp.task('build', function(){
+	return gulp.src('preview/*.html')
+	.pipe(inline({
+		base: './',
+	}))
+	.pipe(gulp.dest('build/'))
+	.pipe(notify('Inserted styles and scripts inline into index.html.'));
 });
 
 /**
@@ -59,6 +75,7 @@ gulp.task('inline', function(){
 gulp.task('watch', function(){
 	gulp.watch(scss, ['sass']);
 	gulp.watch(js, ['js']);
+	gulp.watch(source, ['nunjucks']);
 });
 
 /**
@@ -69,5 +86,3 @@ gulp.task('default', ['sass', 'js', 'watch']);
 //TODO: Font woff inline -> @font-family in CSS
 
 //TODO: Batch image upload to Pardot
-
-//TODO: Some kind of templating engine
