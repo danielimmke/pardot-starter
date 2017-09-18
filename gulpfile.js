@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var inline = require('gulp-inline');
 var rename = require('gulp-rename');
+var entities = require('gulp-html-entities');
 var nunjucksRender = require('gulp-nunjucks-render');
 
 // Style Paths
@@ -65,6 +66,7 @@ gulp.task('build', function(){
 	.pipe(inline({
 		base: './',
 	}))
+	.pipe(entities('encodeNonASCII'))
 	.pipe(gulp.dest('build/'))
 	.pipe(notify('Inserted styles and scripts inline into index.html.'));
 });
