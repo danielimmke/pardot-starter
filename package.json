@@ -1,15 +1,39 @@
 {
+  "name": "pardot-starter-kit",
+  "description": "Quickly build out custom Pardot landing pages using this starter kit.",
+  "version": "1.0",
+  "author": {
+    "name": "Daniel Immke",
+    "url": "https://daniel.do"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:danielimmke/pardot-starter.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/danielimmke/pardot-starter"
+    }
+  ],
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "name": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.7.0",
-    "gulp-concat": "^2.6.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
     "gulp-inline": "^0.1.3",
-    "gulp-notify": "^2.2.0",
-    "gulp-nunjucks-render": "^2.2.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0",
-    "gulp-watch": "^4.3.9",
+    "gulp-notify": "^3.2.0",
+    "gulp-nunjucks-render": "^2.2.3",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
     "gulp-html-entities": "^0.0.3"
   }
 }
