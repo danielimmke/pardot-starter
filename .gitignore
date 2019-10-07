@@ -3,3 +3,5 @@ scripts.js
 !src/js/scripts.js
 npm-debug.log
 .DS_Store
+/build/*.html
+/preview/*
